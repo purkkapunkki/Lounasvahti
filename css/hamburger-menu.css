@@ -42,7 +42,9 @@ body {
   cursor: pointer;
 }
 .active {
-  display: block;
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
 }
 /* Adding Styles to Toggle Button Ends */
 /* For Desktop Start */

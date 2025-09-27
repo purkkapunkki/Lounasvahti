@@ -1,3 +1,5 @@
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import {errorModal, restaurantModal, restaurantRow} from './components';
 import {fetchData} from './functions';
 import {Restaurant} from './interfaces/Restaurant';
@@ -78,6 +80,39 @@ const success = async (pos: GeolocationPosition): Promise<void> => {
       return distanceA - distanceB;
     });
     createTable(restaurants);
+
+    const helsinkiCoordinates: [number, number] = [24.9375, 60.170833];
+    const map = new mapboxgl.Map({
+      container: 'restaurant-map', // container ID
+      style: 'mapbox://styles/mapbox/streets-v12', // style URL
+      center: helsinkiCoordinates, // starting position [lng, lat]
+      zoom: 9, // starting zoom
+      accessToken:
+        'pk.eyJ1IjoiaWxra2FtdGsiLCJhIjoiY20xZzNvMmJ5MXI4YzJrcXpjMWkzYnZlYSJ9.niDiGDLgFfvA2DMqxbB1QQ',
+    });
+
+    for (const restaurant of restaurants) {
+      const coordinates = restaurant.location.coordinates;
+      const popupContent = `
+        <h3>
+          ${restaurant.name}
+        </h3>
+        <p>
+          ${restaurant.address}
+        </p>
+        <p>
+          ${restaurant.postalCode}
+        </p>
+        <p>
+          ${restaurant.city}
+        </p>
+      `;
+      const popup = new mapboxgl.Popup({offset: 25}).setHTML(popupContent);
+      new mapboxgl.Marker({color: 'var(--purple)'})
+        .setLngLat(coordinates)
+        .setPopup(popup)
+        .addTo(map);
+    }
 
     const filterForm = document.querySelectorAll(
       "#filter-form input[name='company']"
