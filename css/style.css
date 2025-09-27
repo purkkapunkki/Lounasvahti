@@ -1,0 +1,108 @@
+:root {
+  --primary-dark: rgb(16, 15, 19);
+  --background-dark: rgb(29, 25, 34);
+  --dark-gradient: linear-gradient(
+    to left top,
+    var(--background-dark),
+    var(--primary-dark)
+  );
+  --primary-light: rgb(248, 249, 250);
+  --background-gray: #a3b6bd;
+  --light-gradient: linear-gradient(
+    to left top,
+    var(--background-gray),
+    var(--primary-light)
+  );
+
+  --purple: rgb(141, 23, 225);
+  --orange: rgb(255, 98, 0);
+  --detail-gradient: linear-gradient(to left top, var(--purple), var(--orange));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+#welcome-text {
+  background: var(--dark-gradient);
+  padding: 3em;
+}
+
+.center {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.rounded-corners {
+  border-radius: 12px;
+}
+
+.highlight {
+  font-weight: bold;
+  background-color: rgb(194, 194, 235);
+}
+
+h1 {
+  color: var(--orange);
+}
+
+i::before {
+  /* https://stackoverflow.com/a/12755244 */
+  background: linear-gradient(to left top, var(--purple), var(--orange));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+i:hover {
+  transition: 0.5s;
+  transform: scale(1.2);
+}
+
+input[type='radio'] {
+  accent-color: var(--orange);
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0 3em 0 3em;
+  padding: 0;
+  background-color: var(--primary-dark);
+  color: var(--primary-light);
+}
+
+body:has(dialog[open]) {
+  overflow-y: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+}
+
+th {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  font-weight: normal;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+footer {
+  background: var(--dark-gradient);
+  padding: 3em;
+}
+
+#copyright-text {
+  text-align: center;
+}

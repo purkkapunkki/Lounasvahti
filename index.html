@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/hamburger-menu.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/690006849c.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="build/main.js" type="module" defer></script>
+  </head>
+
+  <body>
+    <nav class="navigation-bar">
+      <span class="toggle-button">&#9776;</span>
+      <h1>Lounasvahti</h1>
+      <ul class="main-menu">
+        <li>
+          <a href="#" class="menu-item"
+            ><i
+              class="fa-solid fa-xl fa-right-to-bracket"
+              title="Kirjaudu sisään"
+            ></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" class="menu-item"
+            ><i class="fa-solid fa-xl fa-user" title="Luo käyttäjä"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" class="menu-item"
+            ><i class="fa-solid fa-xl fa-lightbulb" title="Dark/light mode"></i
+          ></a>
+        </li>
+      </ul>
+    </nav>
+
+    <section id="welcome-text" class="rounded-corners">
+      <h2>Tervetuloa!</h2>
+      <h3>
+        Lounasvahti auttaa sinua löytämään sinua lähellä olevan
+        opiskelijaravintolan ja sen ruokalistan. Voit eritellä minkä firman
+        ravintoloita haluat nähdä ja voit myös lisätä ravintolan suosikiksi,
+        joten näet sen aina heti ensimmäisenä kun avaat sovelluksen.
+      </h3>
+    </section>
+
+    <form id="filter-form">
+      <p>Valitse mitkä ravintolat haluat nähdä:</p>
+      <input
+        type="radio"
+        id="all-restaurants"
+        name="company"
+        value="all-restaurants"
+      />
+      <label for="all-restaurants">Kaikki ravintolat</label><br />
+      <input
+        type="radio"
+        id="compass-group"
+        name="company"
+        value="compass-group"
+      />
+      <label for="compass-group">Compass group ravintolat</label><br />
+      <input type="radio" id="sodexo" name="company" value="sodexo" />
+      <label for="sodexo">Sodexo ravintolat</label><br />
+      <input
+        type="checkbox"
+        id="show-favorite"
+        name="show-favorite"
+        value="show-favorite"
+      />
+      <label for="show-favorite">Näytä suosikki</label>
+    </form>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+      </tr>
+      <!-- add restaurants here -->
+    </table>
+    <!-- modal -->
+    <dialog>
+      <!-- add restaurant info here when restaurant is clicked -->
+    </dialog>
+
+    <footer>
+      <p id="copyright-text">&#169;Me&#8482;</p>
+    </footer>
+    <script src="js/hamburger-menu.js" defer></script>
+  </body>
+</html>
