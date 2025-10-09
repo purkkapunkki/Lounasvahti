@@ -97,6 +97,13 @@ th {
   text-align: left;
 }
 
+#filter-form {
+  padding: 2em 2em 1em 2em;
+  p {
+    font-size: 1.5em;
+  }
+}
+
 #restaurant-table tbody tr:hover {
   cursor: pointer;
   background: var(--purple);
