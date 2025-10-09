@@ -102,6 +102,13 @@ th {
   background: var(--purple);
 }
 
+#restaurant-table {
+  background: var(--dark-gradient);
+  box-shadow: 0 0 10px var(--primary-light);
+  border-radius: 25px;
+  margin: 2em;
+}
+
 td {
   border-bottom: 1px solid #ccc;
   padding: 0.5em 1em;
