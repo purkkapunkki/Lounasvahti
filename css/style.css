@@ -67,6 +67,10 @@ input[type='radio'] {
   accent-color: var(--orange);
 }
 
+input[type='checkbox'] {
+  accent-color: var(--purple);
+}
+
 body {
   font-family: sans-serif;
   margin: 0 3em 0 3em;
