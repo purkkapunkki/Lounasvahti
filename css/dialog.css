@@ -1,0 +1,9 @@
+#restaurant-dialog {
+  color: var(--primary-light);
+  background: var(--dark-gradient);
+  padding: 3em;
+}
+
+.close-button {
+  border-radius: 50px;
+}
