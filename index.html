@@ -47,7 +47,7 @@
       <h2>Tervetuloa!</h2>
       <h3>
         Lounasvahti auttaa sinua löytämään sinua lähellä olevan
-        opiskelijaravintolan ja sen ruokalistan. Voit eritellä minkä firman
+        opiskelijaravintolan ja sen ruokalistan. Voit eritellä minkä yhtiön
         ravintoloita haluat nähdä ja voit myös lisätä ravintolan suosikiksi,
         joten näet sen aina heti ensimmäisenä kun avaat sovelluksen.
       </h3>
@@ -80,16 +80,18 @@
       <label for="show-favorite">Näytä suosikki</label>
     </form>
 
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Address</th>
-      </tr>
+    <table id="restaurant-table">
+      <thead>
+        <th>Nimi</th>
+        <th>Osoite</th>
+        <th>Yhtiö</th>
+      </thead>
+      <tbody></tbody>
     </table>
 
     <article id="restaurant-map" class="rounded-corners"></article>
 
-    <dialog>
+    <dialog id="restaurant-dialog">
       <!-- add restaurant info here when restaurant is clicked -->
     </dialog>
 
