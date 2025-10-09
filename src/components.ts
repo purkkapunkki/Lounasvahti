@@ -18,15 +18,16 @@ const restaurantRow = (restaurant: Restaurant): HTMLTableRowElement => {
 
 const restaurantModal = (restaurant: Restaurant, menu: Menu): string => {
   const {name, address, city, postalCode, phone, company} = restaurant;
-  let html = `<h3>${name}</h3>
+  let html = ` <button type="button" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+  <h3>${name}</h3>
     <p>${company}</p>
     <p>${address} ${postalCode} ${city}</p>
     <p>${phone}</p>
     <table>
       <tr>
-        <th>Course</th>
-        <th>Diet</th>
-        <th>Price</th>
+        <th>Ruoka</th>
+        <th>Ruokavalio</th>
+        <th>Hinta</th>
       </tr>
     `;
   menu.courses.forEach((course) => {
