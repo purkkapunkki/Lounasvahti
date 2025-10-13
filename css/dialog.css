@@ -1,9 +1,43 @@
 #restaurant-dialog {
   color: var(--primary-light);
   background: var(--dark-gradient);
+  margin: auto;
   padding: 3em;
+  border-radius: 25px;
 }
 
 .close-button {
   border-radius: 50px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+input[type='submit']:hover {
+  background: var(--purple);
+  color: var(--primary-light);
+}
+
+#log-in-dialog {
+  max-width: 27%;
+  color: var(--primary-light);
+  background: var(--dark-gradient);
+  margin: auto;
+  padding: 3em;
+  border-radius: 25px;
+  input {
+    margin: 5px 0 15px 0;
+    padding: 0.5em;
+    border-radius: 10px;
+  }
+}
+
+:focus {
+  outline: solid var(--orange);
+}
+
+::backdrop {
+  background: var(--dark-gradient);
+  opacity: 0.75;
 }

@@ -11,6 +11,12 @@
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/hamburger-menu.css" rel="stylesheet" />
     <link href="css/dialog.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <script
       src="https://kit.fontawesome.com/690006849c.js"
       crossorigin="anonymous"
@@ -33,7 +39,11 @@
         </li>
         <li>
           <a href="#" class="menu-item"
-            ><i class="fa-solid fa-xl fa-user" title="Luo käyttäjä"></i
+            ><i
+              id="show-dialog"
+              class="fa-solid fa-xl fa-user"
+              title="Luo käyttäjä"
+            ></i
           ></a>
         </li>
         <li>
@@ -44,8 +54,9 @@
       </ul>
     </nav>
 
-    <dialog>
+    <dialog id="log-in-dialog">
       <form action="">
+        <h1>Kirjaudu sisään</h1>
         <label for="sukunimi">Sukunimi, minimi 3 kirjainta:</label>
         <input
           type="text"
@@ -80,8 +91,10 @@
         />
 
         <div>
-          <input type="submit" value="send" id="send-button" />
-          <button>Sulje</button>
+          <input type="submit" value="Lähetä" id="send-button" />
+          <button type="button" class="close-button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
       </form>
     </dialog>
@@ -143,5 +156,6 @@
     </footer>
     <script src="js/hamburger-menu.js" defer></script>
     <script src="js/lightmode.js" defer></script>
+    <script src="js/dialog.js" defer></script>
   </body>
 </html>
