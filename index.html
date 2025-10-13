@@ -37,12 +37,54 @@
           ></a>
         </li>
         <li>
-          <a href="#" class="menu-item"
+          <a onclick="lightMode()" href="#" class="menu-item"
             ><i class="fa-solid fa-xl fa-lightbulb" title="Dark/light mode"></i
           ></a>
         </li>
       </ul>
     </nav>
+
+    <dialog>
+      <form action="">
+        <label for="sukunimi">Sukunimi, minimi 3 kirjainta:</label>
+        <input
+          type="text"
+          id="sukunimi"
+          name="sukunimi"
+          autofocus
+          placeholder="Sukunimi"
+          minlength="3"
+          maxlength="30"
+          required
+        />
+
+        <label for="email">Email osoite (@metropolia.fi):</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          pattern=".+@metropolia\.fi"
+          required
+        />
+
+        <label for="salasana">Salasana, vähintään 8 merkkiä:</label>
+        <input
+          type="password"
+          id="salasana"
+          name="salasana"
+          placeholder="Salasana"
+          maxlength="15"
+          pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
+          required
+        />
+
+        <div>
+          <input type="submit" value="send" id="send-button" />
+          <button>Sulje</button>
+        </div>
+      </form>
+    </dialog>
 
     <section id="welcome-text" class="rounded-corners">
       <h2>Tervetuloa!</h2>
@@ -100,5 +142,6 @@
       <p id="copyright-text">&#169;Me&#8482;</p>
     </footer>
     <script src="js/hamburger-menu.js" defer></script>
+    <script src="js/lightmode.js" defer></script>
   </body>
 </html>

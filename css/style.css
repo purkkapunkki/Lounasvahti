@@ -135,3 +135,8 @@ footer {
 #copyright-text {
   text-align: center;
 }
+
+.light-mode {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
