@@ -31,6 +31,7 @@ const restaurantModal = (restaurant: Restaurant, menu: Menu): string => {
             id="daily"
             name="menu"
             value="daily-menu"
+            checked
           />
           <label for="daily">Päivän</label>
           <br />
