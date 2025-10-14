@@ -19,6 +19,9 @@ const hideLogInDialogButton = document.querySelector(
 
 const restaurantDialog = document.querySelector('#restaurant-dialog');
 
+const toggleButton = document.querySelector('.toggle-button');
+const mainMenu = document.querySelector('.main-menu');
+
 if (!(signUpDialog instanceof HTMLDialogElement)) {
   throw new Error('Sign up dialog not found');
 }
@@ -41,6 +44,13 @@ if (!(hideLogInDialogButton instanceof HTMLButtonElement)) {
 
 if (!(restaurantDialog instanceof HTMLDialogElement)) {
   throw new Error('Restaurant dialog not found');
+}
+
+if (!(toggleButton instanceof HTMLSpanElement)) {
+  throw new Error('Menu toggle button not found');
+}
+if (!(mainMenu instanceof HTMLUListElement)) {
+  throw new Error('Main menu not found');
 }
 
 showSignUpDialogButton.addEventListener('click', (event: Event) => {
@@ -75,6 +85,15 @@ restaurantDialog.addEventListener('close', (): void => {
   allHighs.forEach((high) => {
     high.classList.remove('highlight');
   });
+});
+
+toggleButton.addEventListener('click', function () {
+  mainMenu.classList.toggle('active');
+  if (mainMenu.classList.contains('active')) {
+    toggleButton.innerHTML = '&#215;';
+  } else {
+    toggleButton.innerHTML = '&#9776;';
+  }
 });
 
 const calculateDistance = (
