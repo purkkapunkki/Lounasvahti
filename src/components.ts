@@ -23,6 +23,20 @@ const restaurantModal = (restaurant: Restaurant, menu: Menu): string => {
     <p>${company}</p>
     <p>${address} ${postalCode} ${city}</p>
     <p>${phone}</p>
+    <form id="filter-form">
+          <p>Ruokalista</p>
+          <input
+            type="radio"
+            id="daily"
+            name="menu"
+            value="daily-menu"
+          />
+          <label for="daily">Päivän</label>
+          <br />
+          <input type="radio" id="weekly" name="menu" value="weekly-menu" />
+          <label for="weekly">Viikon</label>
+          <br />
+      </form>
     <table>
       <tr>
         <th>Ruoka</th>
