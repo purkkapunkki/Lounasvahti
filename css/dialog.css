@@ -3,8 +3,6 @@ dialog {
 }
 
 #restaurant-dialog {
-  color: var(--primary-light);
-  background: var(--dark-gradient);
   margin: auto;
   padding: 3em;
   border-radius: 25px;
@@ -30,8 +28,6 @@ input[type='submit']:hover {
 #sign-up-dialog,
 #log-in-dialog {
   max-width: 27%;
-  color: var(--primary-light);
-  background: var(--dark-gradient);
   margin: auto;
   padding: 3em;
   border-radius: 25px;

@@ -1,11 +1,9 @@
-/* Basic Styles Starts */
-
 body {
   font-family: 'Montserrat', sans-serif;
 }
 .navigation-bar {
   font-size: 18px;
-  background-color: var(--primary-dark);
+  background: var(--background);
   padding: 10px 10px;
   position: sticky;
   top: 0;
@@ -19,8 +17,6 @@ body {
   text-decoration: none;
   color: var(--white);
 }
-/* Basic Styles Ends */
-/* Adding Styles to Menu Items and Logo Start */
 .main-menu li {
   text-align: center;
   margin: 16px auto;
@@ -31,8 +27,6 @@ body {
   margin-top: 10px;
   margin-left: 20px;
 }
-/* Adding Styles to Menu Items and Logo Ends */
-/* Adding Styles to Toggle Button Start */
 .toggle-button {
   position: absolute;
   top: 10px;
@@ -46,8 +40,6 @@ body {
   justify-content: center;
   column-gap: 5px;
 }
-/* Adding Styles to Toggle Button Ends */
-/* For Desktop Start */
 @media screen and (min-width: 768px) {
   .toggle-button {
     display: none;
@@ -69,4 +61,3 @@ body {
     margin-left: 30px;
   }
 }
-/* For Desktop Ends */

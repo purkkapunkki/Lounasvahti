@@ -39,11 +39,13 @@ const restaurantModal = (restaurant: Restaurant, menu: Menu): string => {
           <br />
       </form>
     <table>
-      <tr>
-        <th>Ruoka</th>
-        <th>Ruokavalio</th>
-        <th>Hinta</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>Ruoka</th>
+          <th>Ruokavalio</th>
+          <th>Hinta</th>
+        </tr>
+      </thead>
     `;
   menu.courses.forEach((course) => {
     const {name, diets, price} = course;

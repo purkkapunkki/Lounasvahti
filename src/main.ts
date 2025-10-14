@@ -22,6 +22,8 @@ const restaurantDialog = document.querySelector('#restaurant-dialog');
 const toggleButton = document.querySelector('.toggle-button');
 const mainMenu = document.querySelector('.main-menu');
 
+const darkLightModeToggle = document.querySelector('#dark-light-mode-toggle');
+
 if (!(signUpDialog instanceof HTMLDialogElement)) {
   throw new Error('Sign up dialog not found');
 }
@@ -51,6 +53,10 @@ if (!(toggleButton instanceof HTMLSpanElement)) {
 }
 if (!(mainMenu instanceof HTMLUListElement)) {
   throw new Error('Main menu not found');
+}
+
+if (!(darkLightModeToggle instanceof HTMLAnchorElement)) {
+  throw new Error('Dark light mode toggle not found');
 }
 
 showSignUpDialogButton.addEventListener('click', (event: Event) => {
@@ -94,6 +100,10 @@ toggleButton.addEventListener('click', function () {
   } else {
     toggleButton.innerHTML = '&#9776;';
   }
+});
+
+darkLightModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
 });
 
 const calculateDistance = (
