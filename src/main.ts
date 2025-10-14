@@ -5,12 +5,76 @@ import {fetchData} from './functions';
 import {Restaurant} from './interfaces/Restaurant';
 import {apiUrl, positionOptions} from './variables';
 
-const modal = document.querySelector('dialog');
-if (!modal) {
-  throw new Error('Modal not found');
+const signUpDialog = document.querySelector('#sign-up-dialog');
+const showSignUpDialogButton = document.querySelector('#show-sign-up-dialog');
+const hideSignUpDialogButton = document.querySelector(
+  '#sign-up-dialog .hide-dialog'
+);
+
+const logInDialog = document.querySelector('#log-in-dialog');
+const showLogInDialogButton = document.querySelector('#show-log-in-dialog');
+const hideLogInDialogButton = document.querySelector(
+  '#log-in-dialog .hide-dialog'
+);
+
+const restaurantDialog = document.querySelector('#restaurant-dialog');
+
+if (!(signUpDialog instanceof HTMLDialogElement)) {
+  throw new Error('Sign up dialog not found');
 }
-modal.addEventListener('click', () => {
-  modal.close();
+if (!(showSignUpDialogButton instanceof HTMLAnchorElement)) {
+  throw new Error('Show sign up button not found');
+}
+if (!(hideSignUpDialogButton instanceof HTMLButtonElement)) {
+  throw new Error('Hide sign up button not found');
+}
+
+if (!(logInDialog instanceof HTMLDialogElement)) {
+  throw new Error('Log in dialog not found');
+}
+if (!(showLogInDialogButton instanceof HTMLAnchorElement)) {
+  throw new Error('Show log in button not found');
+}
+if (!(hideLogInDialogButton instanceof HTMLButtonElement)) {
+  throw new Error('Hide log in button not found');
+}
+
+if (!(restaurantDialog instanceof HTMLDialogElement)) {
+  throw new Error('Restaurant dialog not found');
+}
+
+showSignUpDialogButton.addEventListener('click', (event: Event) => {
+  event.preventDefault();
+  signUpDialog.showModal();
+});
+
+hideSignUpDialogButton.addEventListener('click', () => {
+  signUpDialog.close();
+});
+
+showLogInDialogButton.addEventListener('click', (event: Event) => {
+  event.preventDefault();
+  logInDialog.showModal();
+});
+
+hideLogInDialogButton.addEventListener('click', () => {
+  logInDialog.close();
+});
+
+restaurantDialog.addEventListener('click', (event: Event) => {
+  if (event.target instanceof Element) {
+    const closestButton = event.target.closest('#restaurant-dialog button');
+    if (closestButton && closestButton.matches('.hide-dialog')) {
+      restaurantDialog.close();
+    }
+  }
+});
+
+restaurantDialog.addEventListener('close', (): void => {
+  const allHighs = document.querySelectorAll('.highlight');
+  allHighs.forEach((high) => {
+    high.classList.remove('highlight');
+  });
 });
 
 const calculateDistance = (
@@ -21,25 +85,20 @@ const calculateDistance = (
 ): number => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
 const createTable = (restaurants: Restaurant[]): void => {
-  const table = document.querySelector('table');
-  if (table === null) {
-    throw new Error('table element was not found');
+  const tableBody = document.querySelector('#restaurant-table tbody');
+  if (tableBody === null) {
+    throw new Error('tableBody element was not found');
   }
-  table.innerHTML = '';
+  tableBody.innerHTML = '';
   restaurants.forEach((restaurant) => {
     const tr = restaurantRow(restaurant);
-    table.appendChild(tr);
+    tableBody.appendChild(tr);
     tr.addEventListener('click', async () => {
       try {
-        // remove all highlights
-        const allHighs = document.querySelectorAll('.highlight');
-        allHighs.forEach((high) => {
-          high.classList.remove('highlight');
-        });
         // add highlight
         tr.classList.add('highlight');
         // add restaurant data to modal
-        modal.innerHTML = '';
+        restaurantDialog.innerHTML = '';
 
         // fetch menu
         const menu = await fetchData(
@@ -48,12 +107,12 @@ const createTable = (restaurants: Restaurant[]): void => {
         console.log(menu);
 
         const menuHtml = restaurantModal(restaurant, menu);
-        modal.insertAdjacentHTML('beforeend', menuHtml);
+        restaurantDialog.insertAdjacentHTML('beforeend', menuHtml);
 
-        modal.showModal();
+        restaurantDialog.showModal();
       } catch (error) {
-        modal.innerHTML = errorModal((error as Error).message);
-        modal.showModal();
+        restaurantDialog.innerHTML = errorModal((error as Error).message);
+        restaurantDialog.showModal();
       }
     });
   });
@@ -145,8 +204,8 @@ const success = async (pos: GeolocationPosition): Promise<void> => {
       });
     }
   } catch (error) {
-    modal.innerHTML = errorModal((error as Error).message);
-    modal.showModal();
+    restaurantDialog.innerHTML = errorModal((error as Error).message);
+    restaurantDialog.showModal();
   }
 };
 

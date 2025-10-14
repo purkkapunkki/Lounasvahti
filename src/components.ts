@@ -18,8 +18,9 @@ const restaurantRow = (restaurant: Restaurant): HTMLTableRowElement => {
 
 const restaurantModal = (restaurant: Restaurant, menu: Menu): string => {
   const {name, address, city, postalCode, phone, company} = restaurant;
-  let html = ` <button type="button" class="close-button"><i class="fa-solid fa-xmark"></i></button>
-  <h3>${name}</h3>
+  let html = `
+    <button type="button" class="hide-dialog"><i class="fa-solid fa-xmark"></i></button>
+    <h3>${name}</h3>
     <p>${company}</p>
     <p>${address} ${postalCode} ${city}</p>
     <p>${phone}</p>

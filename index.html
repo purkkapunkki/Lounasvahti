@@ -30,38 +30,38 @@
       <h1>Lounasvahti</h1>
       <ul class="main-menu">
         <li>
-          <a href="#" class="menu-item"
-            ><i
+          <a href="#" id="show-log-in-dialog" class="menu-item">
+            <i
               class="fa-solid fa-xl fa-right-to-bracket"
               title="Kirjaudu sisään"
-            ></i
-          ></a>
+            >
+            </i>
+          </a>
         </li>
         <li>
-          <a href="#" class="menu-item"
-            ><i
-              id="show-dialog"
-              class="fa-solid fa-xl fa-user"
-              title="Luo käyttäjä"
-            ></i
-          ></a>
+          <a href="#" id="show-sign-up-dialog" class="menu-item">
+            <i class="fa-solid fa-xl fa-user" title="Luo käyttäjä"></i>
+          </a>
         </li>
         <li>
-          <a onclick="lightMode()" href="#" class="menu-item"
-            ><i class="fa-solid fa-xl fa-lightbulb" title="Dark/light mode"></i
-          ></a>
+          <a onclick="lightMode()" href="#" class="menu-item">
+            <i class="fa-solid fa-xl fa-lightbulb" title="Dark/light mode"></i>
+          </a>
         </li>
       </ul>
     </nav>
 
-    <dialog id="log-in-dialog">
+    <dialog id="sign-up-dialog">
+      <button type="button" class="hide-dialog">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
       <form action="">
-        <h1>Kirjaudu sisään</h1>
-        <label for="sukunimi">Sukunimi, minimi 3 kirjainta:</label>
+        <h1>Luo käyttäjä</h1>
+        <label for="sign-up-sukunimi">Sukunimi, minimi 3 kirjainta:</label>
         <input
           type="text"
-          id="sukunimi"
-          name="sukunimi"
+          id="sign-up-lastname"
+          name="lastname"
           autofocus
           placeholder="Sukunimi"
           minlength="3"
@@ -69,21 +69,21 @@
           required
         />
 
-        <label for="email">Email osoite (@metropolia.fi):</label>
+        <label for="sign-up-email">Email-osoite (@metropolia.fi):</label>
         <input
           type="email"
-          id="email"
+          id="sign-up-email"
           name="email"
           placeholder="Email"
           pattern=".+@metropolia\.fi"
           required
         />
 
-        <label for="salasana">Salasana, vähintään 8 merkkiä:</label>
+        <label for="sign-up-password">Salasana, vähintään 8 merkkiä:</label>
         <input
           type="password"
-          id="salasana"
-          name="salasana"
+          id="sign-up-password"
+          name="password"
           placeholder="Salasana"
           maxlength="15"
           pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
@@ -91,10 +91,39 @@
         />
 
         <div>
-          <input type="submit" value="Lähetä" id="send-button" />
-          <button type="button" class="close-button">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
+          <input type="submit" value="Lähetä" />
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="log-in-dialog">
+      <button type="button" class="hide-dialog">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <form action="">
+        <h1>Kirjaudu sisään</h1>
+
+        <label for="log-in-email">Email-osoite (@metropolia.fi):</label>
+        <input
+          type="email"
+          id="log-in-email"
+          name="email"
+          placeholder="Email"
+          pattern=".+@metropolia\.fi"
+          required
+        />
+
+        <label for="log-in-password">Salasana</label>
+        <input
+          type="password"
+          id="log-in-password"
+          name="password"
+          placeholder="Salasana"
+          required
+        />
+
+        <div>
+          <input type="submit" value="Lähetä" />
         </div>
       </form>
     </dialog>
@@ -156,6 +185,5 @@
     </footer>
     <script src="js/hamburger-menu.js" defer></script>
     <script src="js/lightmode.js" defer></script>
-    <script src="js/dialog.js" defer></script>
   </body>
 </html>
