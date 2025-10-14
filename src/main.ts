@@ -24,6 +24,8 @@ const mainMenu = document.querySelector('.main-menu');
 
 const darkLightModeToggle = document.querySelector('#dark-light-mode-toggle');
 
+const restaurantTable = document.querySelector('#restaurant-table');
+
 if (!(signUpDialog instanceof HTMLDialogElement)) {
   throw new Error('Sign up dialog not found');
 }
@@ -57,6 +59,10 @@ if (!(mainMenu instanceof HTMLUListElement)) {
 
 if (!(darkLightModeToggle instanceof HTMLAnchorElement)) {
   throw new Error('Dark light mode toggle not found');
+}
+
+if (!(restaurantTable instanceof HTMLTableElement)) {
+  throw new Error('Restaurant table not found');
 }
 
 showSignUpDialogButton.addEventListener('click', (event: Event) => {
@@ -106,6 +112,39 @@ darkLightModeToggle.addEventListener('click', () => {
   document.body.classList.toggle('light-mode');
 });
 
+restaurantTable.addEventListener('click', (event: Event) => {
+  if (!(event.target instanceof HTMLElement)) {
+    return;
+  }
+  const clickedFavoriteIcon = event.target.closest(
+    '#restaurant-table .favorite-icon'
+  );
+  if (!(clickedFavoriteIcon instanceof HTMLElement)) {
+    return;
+  }
+  const clickedRestaurantRow = clickedFavoriteIcon.closest('tr');
+  if (!clickedRestaurantRow) {
+    return;
+  }
+
+  const clickedRestaurantId = clickedRestaurantRow.dataset.restaurantId;
+  document
+    .querySelectorAll(`.favorite-icon.fa-solid`)
+    .forEach((icon: Element) => {
+      const restaurantRow = icon.closest('tr');
+      if (!restaurantRow) {
+        return;
+      }
+      if (restaurantRow.dataset.restaurantId === clickedRestaurantId) {
+        return;
+      }
+      icon.classList.remove('fa-solid');
+      icon.classList.add('fa-regular');
+    });
+  clickedFavoriteIcon.classList.toggle('fa-regular');
+  clickedFavoriteIcon.classList.toggle('fa-solid');
+});
+
 const calculateDistance = (
   x1: number,
   y1: number,
@@ -122,18 +161,24 @@ const createTable = (restaurants: Restaurant[]): void => {
   restaurants.forEach((restaurant) => {
     const tr = restaurantRow(restaurant);
     tableBody.appendChild(tr);
-    tr.addEventListener('click', async () => {
+    tr.addEventListener('click', async (event: Event) => {
+      if (!event.target) {
+        return;
+      }
+      if (!(event.target instanceof HTMLElement)) {
+        return;
+      }
+      const clickedCell = event.target.closest('td');
+      if (clickedCell && clickedCell.matches('.favorite-cell')) {
+        return;
+      }
       try {
-        // add highlight
         tr.classList.add('highlight');
-        // add restaurant data to modal
         restaurantDialog.innerHTML = '';
 
-        // fetch menu
         const menu = await fetchData(
           apiUrl + `/restaurants/daily/${restaurant._id}/fi`
         );
-        console.log(menu);
 
         const menuHtml = restaurantModal(restaurant, menu);
         restaurantDialog.insertAdjacentHTML('beforeend', menuHtml);
@@ -155,7 +200,6 @@ const success = async (pos: GeolocationPosition): Promise<void> => {
   try {
     const crd = pos.coords;
     const restaurants: Restaurant[] = await fetchData(apiUrl + '/restaurants');
-    console.log(restaurants);
     restaurants.sort((a, b): number => {
       const x1 = crd.latitude;
       const y1 = crd.longitude;

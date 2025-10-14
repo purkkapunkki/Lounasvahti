@@ -4,12 +4,17 @@ import {Restaurant} from './interfaces/Restaurant';
 const restaurantRow = (restaurant: Restaurant): HTMLTableRowElement => {
   const {name, address, company} = restaurant;
   const tr = document.createElement('tr');
+  tr.dataset.restaurantId = restaurant._id;
+  const favoriteCell = document.createElement('td');
+  favoriteCell.classList.add('favorite-cell');
+  favoriteCell.innerHTML = '<i class="fa-regular fa-star favorite-icon"></i>';
   const nameCell = document.createElement('td');
   nameCell.innerText = name;
   const addressCell = document.createElement('td');
   addressCell.innerText = address;
   const companyCell = document.createElement('td');
   companyCell.innerText = company;
+  tr.appendChild(favoriteCell);
   tr.appendChild(nameCell);
   tr.appendChild(addressCell);
   tr.appendChild(companyCell);
