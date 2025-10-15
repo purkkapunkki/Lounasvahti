@@ -21,7 +21,7 @@
       src="https://kit.fontawesome.com/690006849c.js"
       crossorigin="anonymous"
     ></script>
-    <script src="build/main.js" type="module" defer></script>
+    <script src="build/main.js" type="module"></script>
   </head>
 
   <body>
@@ -55,9 +55,9 @@
       <button type="button" class="hide-dialog">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <form action="">
-        <h1>Luo käyttäjä</h1>
-        <label for="sign-up-sukunimi">Sukunimi, minimi 3 kirjainta:</label>
+      <form>
+        <h2>Luo käyttäjä</h2>
+        <label for="sign-up-lastname">Sukunimi, minimi 3 kirjainta:</label>
         <input
           type="text"
           id="sign-up-lastname"
@@ -100,8 +100,8 @@
       <button type="button" class="hide-dialog">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <form action="">
-        <h1>Kirjaudu sisään</h1>
+      <form>
+        <h2>Kirjaudu sisään</h2>
 
         <label for="log-in-email">Email-osoite (@metropolia.fi):</label>
         <input
@@ -168,15 +168,17 @@
 
     <table id="restaurant-table">
       <thead>
-        <th>Suosikki</th>
-        <th>Nimi</th>
-        <th>Osoite</th>
-        <th>Yhtiö</th>
+        <tr>
+          <th>Suosikki</th>
+          <th>Nimi</th>
+          <th>Osoite</th>
+          <th>Yhtiö</th>
+        </tr>
       </thead>
       <tbody></tbody>
     </table>
 
-    <article id="restaurant-map" class="rounded-corners"></article>
+    <section id="restaurant-map" class="rounded-corners"></section>
 
     <dialog id="restaurant-dialog">
       <!-- add restaurant info here when restaurant is clicked -->
