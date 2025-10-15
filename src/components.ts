@@ -60,7 +60,9 @@ const weeklyMenuSection = (menu: WeeklyMenu): string => {
 const restaurantModal = (restaurant: Restaurant, menu: DailyMenu): string => {
   const {name, address, city, postalCode, phone, company} = restaurant;
   let html = `
-    <button type="button" class="hide-dialog"><i class="fa-solid fa-xmark"></i></button>
+    <button type="button" class="hide-dialog" aria-label="Piilota modaali">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
     <h3>${name}</h3>
     <p>${company}</p>
     <p>${address} ${postalCode} ${city}</p>
