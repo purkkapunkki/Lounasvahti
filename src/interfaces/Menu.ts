@@ -17,4 +17,4 @@ interface WeeklyMenu {
   days: DailyCourse[];
 }
 
-export {Course, DailyMenu, WeeklyMenu};
+export type {Course, DailyMenu, WeeklyMenu};

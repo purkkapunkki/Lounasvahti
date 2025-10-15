@@ -1,9 +1,6 @@
 interface Point {
-    type: "Point",
-    coordinates: [
-        number,
-        number,
-    ]
+  type: 'Point';
+  coordinates: [number, number];
 }
 
-export {Point};
+export type {Point};
