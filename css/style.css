@@ -84,6 +84,10 @@
   }
 }
 
+.mapboxgl-popup-content {
+  color: var(--primary-dark);
+}
+
 h1 {
   color: var(--orange);
   text-align: center;
