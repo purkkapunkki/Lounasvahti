@@ -49,8 +49,11 @@
 
 #filter-form {
   padding: 2em 2em 1em 2em;
-  p {
-    font-size: 1.5em;
+  fieldset {
+    border: none;
+  }
+  legend {
+    font-size: 1.25em;
   }
 }
 
@@ -86,6 +89,10 @@
 
 .mapboxgl-popup-content {
   color: var(--primary-dark);
+}
+
+.menu-table:not(:last-child) {
+  margin-bottom: 2rem;
 }
 
 h1,

@@ -1,4 +1,4 @@
-import {Menu} from './interfaces/Menu';
+import {Course, DailyMenu, WeeklyMenu} from './interfaces/Menu';
 import {Restaurant} from './interfaces/Restaurant';
 
 const restaurantRow = (restaurant: Restaurant): HTMLTableRowElement => {
@@ -21,7 +21,43 @@ const restaurantRow = (restaurant: Restaurant): HTMLTableRowElement => {
   return tr;
 };
 
-const restaurantModal = (restaurant: Restaurant, menu: Menu): string => {
+const dailyMenuTable = (courses: Course[]): string => {
+  let menuHtml = `
+  <table class="menu-table">
+    <thead>
+      <tr>
+        <th>Ruoka</th>
+        <th>Ruokavalio</th>
+        <th>Hinta</th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+  courses.forEach((course) => {
+    const {name, diets, price} = course;
+    menuHtml += `
+      <tr>
+        <td>${name}</td>
+        <td>${diets ?? ' - '}</td>
+        <td>${price ?? ' - '}</td>
+      </tr>
+    `;
+  });
+  menuHtml += '</tbody></table>';
+  return menuHtml;
+};
+
+const weeklyMenuSection = (menu: WeeklyMenu): string => {
+  let menuHtml = '';
+  menu.days.forEach((dailyCourse): void => {
+    let dayHtml = `<h4>${dailyCourse.date}</h4>`;
+    dayHtml += dailyMenuTable(dailyCourse.courses);
+    menuHtml += dayHtml;
+  });
+  return menuHtml;
+};
+
+const restaurantModal = (restaurant: Restaurant, menu: DailyMenu): string => {
   const {name, address, city, postalCode, phone, company} = restaurant;
   let html = `
     <button type="button" class="hide-dialog"><i class="fa-solid fa-xmark"></i></button>
@@ -30,40 +66,25 @@ const restaurantModal = (restaurant: Restaurant, menu: Menu): string => {
     <p>${address} ${postalCode} ${city}</p>
     <p>${phone}</p>
     <form id="filter-form">
-          <p>Ruokalista</p>
-          <input
-            type="radio"
-            id="daily"
-            name="menu"
-            value="daily-menu"
-            checked
-          />
-          <label for="daily">Päivän</label>
-          <br />
-          <input type="radio" id="weekly" name="menu" value="weekly-menu" />
-          <label for="weekly">Viikon</label>
-          <br />
-      </form>
-    <table>
-      <thead>
-        <tr>
-          <th>Ruoka</th>
-          <th>Ruokavalio</th>
-          <th>Hinta</th>
-        </tr>
-      </thead>
+      <fieldset>
+        <legend>Ruokalista</legend>
+        <input
+          type="radio"
+          id="daily"
+          name="menu-type"
+          value="daily-menu"
+          checked
+        />
+        <label for="daily">Päivän</label>
+        <br />
+        <input type="radio" id="weekly" name="menu-type" value="weekly-menu" />
+        <label for="weekly">Viikon</label>
+        <br />
+      </fieldset>
+    </form>
     `;
-  menu.courses.forEach((course) => {
-    const {name, diets, price} = course;
-    html += `
-          <tr>
-            <td>${name}</td>
-            <td>${diets ?? ' - '}</td>
-            <td>${price ?? ' - '}</td>
-          </tr>
-          `;
-  });
-  html += '</table>';
+  const menuTable = dailyMenuTable(menu.courses);
+  html += `<section id="restaurant-menu">${menuTable}</section>`;
   return html;
 };
 
@@ -75,4 +96,10 @@ const errorModal = (message: string): string => {
   return html;
 };
 
-export {restaurantRow, restaurantModal, errorModal};
+export {
+  dailyMenuTable,
+  weeklyMenuSection,
+  restaurantRow,
+  restaurantModal,
+  errorModal,
+};

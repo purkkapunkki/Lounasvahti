@@ -1,7 +1,14 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import {errorModal, restaurantModal, restaurantRow} from './components';
+import {
+  dailyMenuTable,
+  weeklyMenuSection,
+  errorModal,
+  restaurantModal,
+  restaurantRow,
+} from './components';
 import {fetchData} from './functions';
+import {DailyMenu, WeeklyMenu} from './interfaces/Menu';
 import {Restaurant} from './interfaces/Restaurant';
 import {apiUrl, positionOptions} from './variables';
 
@@ -83,16 +90,62 @@ hideLogInDialogButton.addEventListener('click', () => {
   logInDialog.close();
 });
 
-restaurantDialog.addEventListener('click', (event: Event) => {
-  if (event.target instanceof Element) {
-    const closestButton = event.target.closest('#restaurant-dialog button');
-    if (closestButton && closestButton.matches('.hide-dialog')) {
-      restaurantDialog.close();
+restaurantDialog.addEventListener(
+  'click',
+  async (event: Event): Promise<void> => {
+    if (event.target instanceof Element) {
+      const closestButton = event.target.closest('#restaurant-dialog button');
+      if (closestButton && closestButton.matches('.hide-dialog')) {
+        restaurantDialog.close();
+        return;
+      }
+
+      const radioButton = event.target.closest(
+        "input[type='radio'][name='menu-type']"
+      );
+      if (!(radioButton instanceof HTMLInputElement)) {
+        return;
+      }
+
+      const restaurantId = restaurantDialog.dataset.restaurantId;
+      if (restaurantId === undefined) {
+        console.warn('Unknown restaurant');
+        return;
+      }
+
+      const menuSection = document.getElementById('restaurant-menu');
+      if (menuSection === null) {
+        console.warn('Menu section was not found');
+        return;
+      }
+
+      let menuContent: string;
+      switch (radioButton.value) {
+        case 'daily-menu':
+          const dailyMenu = (await fetchMenu(
+            restaurantId,
+            'daily'
+          )) as DailyMenu;
+          menuContent = dailyMenuTable(dailyMenu.courses);
+          break;
+        case 'weekly-menu':
+          const weeklyMenu = (await fetchMenu(
+            restaurantId,
+            'weekly'
+          )) as WeeklyMenu;
+          menuContent = weeklyMenuSection(weeklyMenu);
+          break;
+        default:
+          console.warn('Unknown menu type');
+          return;
+      }
+      menuSection.innerHTML = menuContent;
     }
   }
-});
+);
 
 restaurantDialog.addEventListener('close', (): void => {
+  restaurantDialog.dataset.restaurantId = '';
   const allHighs = document.querySelectorAll('.highlight');
   allHighs.forEach((high) => {
     high.classList.remove('highlight');
@@ -152,6 +205,13 @@ const calculateDistance = (
   y2: number
 ): number => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
+const fetchMenu = (
+  restaurantId: string,
+  menuType: 'daily' | 'weekly'
+): Promise<any> => {
+  return fetchData(apiUrl + `/restaurants/${menuType}/${restaurantId}/fi`);
+};
+
 const createTable = (restaurants: Restaurant[]): void => {
   const tableBody = document.querySelector('#restaurant-table tbody');
   if (tableBody === null) {
@@ -176,12 +236,11 @@ const createTable = (restaurants: Restaurant[]): void => {
         tr.classList.add('highlight');
         restaurantDialog.innerHTML = '';
 
-        const menu = await fetchData(
-          apiUrl + `/restaurants/daily/${restaurant._id}/fi`
-        );
+        const menu = await fetchMenu(restaurant._id, 'daily');
 
         const menuHtml = restaurantModal(restaurant, menu);
         restaurantDialog.insertAdjacentHTML('beforeend', menuHtml);
+        restaurantDialog.dataset.restaurantId = restaurant._id;
 
         restaurantDialog.showModal();
       } catch (error) {
