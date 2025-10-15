@@ -30,7 +30,12 @@
       <h1>Lounasvahti</h1>
       <ul class="main-menu">
         <li>
-          <a href="#" id="show-log-in-dialog" class="menu-item">
+          <a
+            href="#"
+            id="show-log-in-dialog"
+            class="menu-item"
+            aria-label="Kirjaudu sisään"
+          >
             <i
               class="fa-solid fa-xl fa-right-to-bracket"
               title="Kirjaudu sisään"
@@ -39,12 +44,22 @@
           </a>
         </li>
         <li>
-          <a href="#" id="show-sign-up-dialog" class="menu-item">
+          <a
+            href="#"
+            id="show-sign-up-dialog"
+            class="menu-item"
+            aria-label="Luo käyttäjä"
+          >
             <i class="fa-solid fa-xl fa-user" title="Luo käyttäjä"></i>
           </a>
         </li>
         <li>
-          <a href="#" id="dark-light-mode-toggle" class="menu-item">
+          <a
+            href="#"
+            id="dark-light-mode-toggle"
+            class="menu-item"
+            aria-label="Dark/light mode"
+          >
             <i class="fa-solid fa-xl fa-lightbulb" title="Dark/light mode"></i>
           </a>
         </li>
@@ -52,7 +67,7 @@
     </nav>
 
     <dialog id="sign-up-dialog">
-      <button type="button" class="hide-dialog">
+      <button type="button" class="hide-dialog" aria-label="Piilota modaali">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <form>
@@ -97,7 +112,7 @@
     </dialog>
 
     <dialog id="log-in-dialog">
-      <button type="button" class="hide-dialog">
+      <button type="button" class="hide-dialog" aria-label="Piilota modaali">
         <i class="fa-solid fa-xmark"></i>
       </button>
       <form>
